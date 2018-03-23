@@ -1,0 +1,63 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.malevent.pro.deeplearning"
+        minSdkVersion 21
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    dataBinding {
+        enabled = true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+}
+
+dependencies {
+    ext.RX_LIFE_CYCLE_VERSION = '2.1.0'
+    ext.DAGGER2_VERSION = '2.14.1'
+    ext.BUTTER_KNIFE_VERSION = '8.6.0'
+    ext.RX_ANDROID_VERSION = '2.0.1'
+    ext.RX_JAVA_VERSION = '2.1.1'
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    compile "org.tensorflow:tensorflow-android:+"
+
+    // RX - for composing asynchronous and event-based programs using observable sequences
+    implementation "io.reactivex.rxjava2:rxandroid:${RX_ANDROID_VERSION}"
+    implementation "io.reactivex.rxjava2:rxjava:${RX_JAVA_VERSION}"
+
+    // RX-Life cycle - Lifecycle handling APIs
+    implementation "com.trello.rxlifecycle2:rxlifecycle:${RX_LIFE_CYCLE_VERSION}"
+    implementation "com.trello.rxlifecycle2:rxlifecycle-components:${RX_LIFE_CYCLE_VERSION}"
+
+    // Dagger 2 - Dependency Injection
+    implementation "com.google.dagger:dagger:${DAGGER2_VERSION}"
+    annotationProcessor "com.google.dagger:dagger-compiler:${DAGGER2_VERSION}"
+
+    // ButterKnife - Bind view using Annotations @BindView, @Click, etc
+    implementation "com.jakewharton:butterknife:${BUTTER_KNIFE_VERSION}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTER_KNIFE_VERSION}"
+}
